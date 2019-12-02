@@ -3,7 +3,7 @@ using System.IO;
 
 namespace CodeRunner
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
@@ -26,9 +26,15 @@ namespace CodeRunner
             Console.WriteLine(output);
         }
 
-        public static object RunProgram(string program)
+        public static string RunProgram(string program)
         {
-            throw new NotImplementedException();
+            var opcodeList = program.Split(',');
+            for (int i = 0; i != 99 && i < opcodeList.Length; i+=4) 
+            {
+
+            }
+
+            return String.Join(',',opcodeList);
         }
     }
 }
