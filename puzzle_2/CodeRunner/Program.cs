@@ -25,6 +25,11 @@ namespace CodeRunner
             var opcodesStr = program.Split(',').ToList();
             List<int> opcodes = opcodesStr.ConvertAll( x => Int32.Parse(x));
 
+            if ("p".Equals(args[1], StringComparison.InvariantCultureIgnoreCase)) {
+                opcodes[1] = 12;
+                opcodes[2] = 2;
+            }
+
             // run the program
             RunProgram(opcodes);
 
