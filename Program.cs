@@ -21,14 +21,18 @@ namespace advent_of_code_2019
                 File.Open(inputFile, FileMode.Open))
             )
             {
+                int sum = 0;
                 while(!inputReader.EndOfStream) 
                 {
                     int mass = Int32.Parse(inputReader.ReadLine().Trim());
                     
                     int fuel = mass / 3 - 2;
 
-                    Console.WriteLine($"Fuel for Mass({mass}): {fuel}");
+                    sum += fuel;
+                    //Console.WriteLine($"Fuel for Mass({mass}): {fuel}");
                 }
+
+                Console.WriteLine($"Fuel Sum: {sum}");
             }
         }
     }
