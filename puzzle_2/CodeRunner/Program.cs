@@ -9,7 +9,7 @@ namespace CodeRunner
     {
         static void Main(string[] args)
         {
-            if (args.Length == 0 || !File.Exists(args[0]))
+            if (args.Length < 2 || !File.Exists(args[0]))
             {
                 Console.WriteLine("Please provide a file input");
             }
@@ -25,15 +25,22 @@ namespace CodeRunner
             var opcodesStr = program.Split(',').ToList();
             List<int> opcodes = opcodesStr.ConvertAll( x => Int32.Parse(x));
 
-            if ("p".Equals(args[1], StringComparison.InvariantCultureIgnoreCase)) {
-                opcodes[1] = 12;
-                opcodes[2] = 2;
+            //int NOUN = Int32.Parse(args[1]);
+            //int VERB = Int32.Parse(args[2]);
+
+            int result = 0;
+            int wanted = Int32.Parse(args[1]);
+            int i=0,j=0;
+            for(i=0; i<=99 && result != wanted; i++) {
+                for(j=0; j<=99 && result != wanted; j++) {
+                    Console.WriteLine($"Trying NOUN:{i},VERB:{j}");
+                    result = RunProgram(opcodes.ToList(), i, j);
+                }
             }
-
             // run the program
-            RunProgram(opcodes);
+            //int result = RunProgram(opcodes, NOUN, VERB);
 
-            Console.WriteLine(String.Join(',',opcodes));
+            Console.WriteLine($"NOUN:{i} ,VERB:{j}");
         }
 
         public static List<Func<int,int,int>> ops = new List<Func<int,int,int>>{
@@ -41,8 +48,11 @@ namespace CodeRunner
             (x,y) =>  x + y ,
             (x,y) =>  x * y 
         };
-        public static void RunProgram(List<int> opcodes)
+        public static int RunProgram(List<int> opcodes, int NOUN, int VERB)
         {
+            opcodes[1] = NOUN;
+            opcodes[2] = VERB;            
+
             for (int i = 0; i < opcodes.Count && opcodes[i] != 99; i+=4) 
             {
                 var f = ops[ opcodes[i] ];
@@ -55,6 +65,8 @@ namespace CodeRunner
 
                 opcodes[resultslot] = f(arg1,arg2);
             }
+
+            return opcodes[0];
         }
     }
 }
