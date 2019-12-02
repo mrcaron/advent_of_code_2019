@@ -7,32 +7,37 @@ namespace advent_of_code_2019
     {
         static void Main(string[] args)
         {
-            CalculateFuel(args[0]);
-        }
-
-        private static void CalculateFuel(string inputFile)
-        {
-            if (! File.Exists(inputFile))
+            string inputFile = args[0];
+            if (!File.Exists(inputFile))
             {
                 Console.WriteLine("Can't work without input!");
             }
 
+            int sum = 0;
             using (var inputReader = new StreamReader(
                 File.Open(inputFile, FileMode.Open))
             )
             {
-                int sum = 0;
-                while(!inputReader.EndOfStream) 
-                {
+                while (!inputReader.EndOfStream)
+                {            
                     int mass = Int32.Parse(inputReader.ReadLine().Trim());
-                    
-                    int fuel = mass / 3 - 2;
+                    int fuel = CalculateFuel(mass);
+                    //Console.WriteLine($"Fuel for Mass({mass}): {fuel}");
 
                     sum += fuel;
-                    //Console.WriteLine($"Fuel for Mass({mass}): {fuel}");
                 }
+            }
 
-                Console.WriteLine($"Fuel Sum: {sum}");
+            Console.WriteLine($"Fuel Sum: {sum}");
+        }
+
+        private static int CalculateFuel(int moduleMass)
+        {
+            int fuel = moduleMass / 3 - 2;
+            if (fuel > 0) {
+                return fuel + CalculateFuel(fuel);
+            } else {
+                return 0;
             }
         }
     }
