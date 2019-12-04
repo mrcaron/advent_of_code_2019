@@ -13,6 +13,11 @@ namespace puzzle_3
         public Point() => (X,Y) = (0,0);
         public Point(int x, int y) => (X,Y) = (x,y);        
 
+        public override string ToString()
+        {
+            return $"({X},{Y})";
+        }
+
         public override bool Equals(object? obj) {
             if (obj is null || ! (obj is Point))
             {

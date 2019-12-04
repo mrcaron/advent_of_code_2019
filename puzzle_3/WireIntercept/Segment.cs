@@ -21,9 +21,9 @@ public class Segment {
             (X_MIN,X_MAX) = p1.X < p2.X ? (p1.X,p2.X) : (p2.X,p1.X);
             (Y_MIN,Y_MAX) = p1.Y < p2.Y ? (p1.Y,p2.Y) : (p2.Y,p1.Y);
 
-            isVertical = p1.Y == p2.Y; 
+            isVertical = p1.Y != p2.Y; 
         } 
-        
+
         #nullable enable
         public Point? GetInsersect(Segment s) {
             // No intersection if parallel segements
@@ -37,15 +37,15 @@ public class Segment {
 
             // Case where s is horizontal
             else if (!s.isVertical && 
-                this.X_MAX > s.P1.X && s.P1.X > this.X_MIN )
+                s.X_MAX > this.P1.X && this.P1.X > s.X_MIN )
             {
-                return new Point(s.P1.X, this.Y_MAX);
+                return new Point(this.P1.X, s.P1.Y);
             }
             // Case where s is vertical
             else if (s.isVertical && 
-                this.Y_MAX > s.P1.Y && s.P1.Y > this.Y_MIN)
+                s.Y_MAX > this.P1.Y && this.P1.Y > s.Y_MIN)
             {
-                return new Point(this.P1.X,s.P1.Y);
+                return new Point(s.P1.X, this.P1.Y);
             }
 
             // there is no intersect

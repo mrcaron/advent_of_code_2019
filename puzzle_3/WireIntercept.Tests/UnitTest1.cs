@@ -37,7 +37,8 @@ namespace WireIntercept.Tests
             
             Assert.AreEqual(
                 new Point(1,1),
-                s1.GetInsersect(s2)
+                s1.GetInsersect(s2),
+                "(0,1) - (2,1) // (1,0) - (1,2)"
             );
 
             s1 = new Segment( new Point(6,7), new Point(6,3) );
@@ -45,8 +46,31 @@ namespace WireIntercept.Tests
             
             Assert.AreEqual(
                 new Point(6,5),
-                s1.GetInsersect(s2)
+                s1.GetInsersect(s2),
+                "(6,7) - (6,3) // (3,5) - (8,5)"
             );
+        }
+
+        [TestMethod]
+        public void TestFindIntersects() 
+        {
+            var wire1 = new List<string> {
+                "R8","U5","L5","D3"
+            };
+            var wire2 = new List<string> {
+                "U7","R6","D4","L4"
+            };
+
+            List<Point> intsec = Program.FindIntersections(wire1, wire2);
+
+            CollectionAssert.AreEqual(
+                new List<Point> {
+                    new Point(3,3),
+                    new Point(6,5)
+                },
+                intsec
+            );
+
         }
     }
 }

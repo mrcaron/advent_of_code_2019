@@ -25,9 +25,42 @@ namespace puzzle_3
             var intersections = FindIntersections(wire1, wire2);
             
         }
-        public static List<string> FindIntersections(
+
+        #nullable enable
+        public static List<Point> FindIntersections(
             List<string> wire1, List<string> wire2) {
-            throw new NotImplementedException();
+            
+            var wire1Points = ConvertRoute(wire1);
+            var wire2Points = ConvertRoute(wire2);
+
+            var segments_w1 = ConvertToSegments(wire1Points);
+            var segments_w2 = ConvertToSegments(wire1Points);
+
+            var intersects = new List<Point>();
+            foreach (var s1 in segments_w1) {
+                foreach (var s2 in segments_w2) {
+                    Point? i = s1.GetInsersect(s2);
+                    if (i != null) {
+                        intersects.Add(i);
+                    }
+                }
+            }
+
+            return intersects;
+        }
+
+        private static List<Segment> ConvertToSegments(List<Point> points)
+        {
+            List<Segment> segments = new List<Segment>();
+            Point pLast = new Point();
+
+            foreach(var p in points)
+            {
+                segments.Add( new Segment(pLast, p));
+                pLast = p;
+            }
+
+            return segments;
         }
 
         private static Dictionary<char,Func<Point,int,Point>> PlotNext = 
