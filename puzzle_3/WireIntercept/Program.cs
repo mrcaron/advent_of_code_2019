@@ -34,6 +34,7 @@ namespace puzzle_3
             } else {
                 // find shortest path to points
                 var steps = FindShortestPathTo(intersections, wire1path, wire2path);
+                Console.Out.WriteLine(steps);
             }
         }
 
