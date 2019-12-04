@@ -47,9 +47,6 @@ namespace puzzle_3
             var Xminmax = new int[] { p1.X, p2.X };
             var Yminmax = new int[] { p1.Y, p2.Y };
 
-            //Array.Sort(Xminmax);
-            //Array.Sort(Yminmax);
-
             (X_MIN,X_MAX) = p1.X < p2.X ? (p1.X,p2.X) : (p2.X,p1.X);
             (Y_MIN,Y_MAX) = p1.Y < p2.Y ? (p1.Y,p2.Y) : (p2.Y,p1.Y);
 

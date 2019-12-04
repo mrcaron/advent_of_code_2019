@@ -39,6 +39,14 @@ namespace WireIntercept.Tests
                 new Point(1,1),
                 s1.GetInsersect(s2)
             );
+
+            s1 = new Segment( new Point(6,7), new Point(6,3) );
+            s2 = new Segment( new Point(3,5), new Point(8,5) );
+            
+            Assert.AreEqual(
+                new Point(6,5),
+                s1.GetInsersect(s2)
+            );
         }
     }
 }
