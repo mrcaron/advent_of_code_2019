@@ -39,11 +39,18 @@ namespace puzzle_3
 
         public static int FindShortestPathTo(List<Point> intersections, Path path1, Path path2)
         {
+            List<int> stepsToIntersections = new List<int>();
+
             foreach (var p in intersections) 
             {
                 // p is an intersection
+                var steps1 = path1.GetStepsTo(p);
+                var steps2 = path2.GetStepsTo(p);
+                stepsToIntersections.Add( steps1 + steps2 );
             }
-            throw new NotImplementedException();
+
+            stepsToIntersections.Sort();
+            return stepsToIntersections.First();
         }
 
         private static Dictionary<char,Func<Point,int,Point>> PlotNext = 

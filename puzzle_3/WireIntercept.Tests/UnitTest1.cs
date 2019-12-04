@@ -78,5 +78,26 @@ namespace WireIntercept.Tests
             );
 
         }
+
+        [TestMethod]
+        public void TestPathTo() {
+            var wire1 = new List<string> {
+                "R8","U5","L5","D3"
+            };
+            var w1 = new Path(Program.ConvertRoute(wire1));
+            Assert.AreEqual(1, w1.GetStepsTo(new Point(1,0)));
+            Assert.AreEqual(2, w1.GetStepsTo(new Point(2,0)));
+            Assert.AreEqual(3, w1.GetStepsTo(new Point(3,0)));
+            Assert.AreEqual(4, w1.GetStepsTo(new Point(4,0)));
+            Assert.AreEqual(5, w1.GetStepsTo(new Point(5,0)));
+            Assert.AreEqual(6, w1.GetStepsTo(new Point(6,0)));
+            Assert.AreEqual(7, w1.GetStepsTo(new Point(7,0)));
+            Assert.AreEqual(8, w1.GetStepsTo(new Point(8,0)));
+            Assert.AreEqual(9, w1.GetStepsTo(new Point(8,1)));
+            Assert.AreEqual(10, w1.GetStepsTo(new Point(8,2)));
+            Assert.AreEqual(11, w1.GetStepsTo(new Point(8,3)));
+            Assert.AreEqual(12, w1.GetStepsTo(new Point(8,4)));
+            Assert.AreEqual(13, w1.GetStepsTo(new Point(8,5)));
+        }
     }
 }
