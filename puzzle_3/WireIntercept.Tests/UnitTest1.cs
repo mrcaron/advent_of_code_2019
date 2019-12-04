@@ -98,6 +98,24 @@ namespace WireIntercept.Tests
             Assert.AreEqual(11, w1.GetStepsTo(new Point(8,3)));
             Assert.AreEqual(12, w1.GetStepsTo(new Point(8,4)));
             Assert.AreEqual(13, w1.GetStepsTo(new Point(8,5)));
+            Assert.AreEqual(20, w1.GetStepsTo(new Point(3,3)));
+        }
+
+        [TestMethod]
+        public void TestShortestPath() {
+            var wire1 = new List<string> {
+                "R8","U5","L5","D3"
+            };
+            var wire2 = new List<string> {
+                "U7","R6","D4","L4"
+            };
+            var w1 = new Path(Program.ConvertRoute(wire1));
+            var w2 = new Path(Program.ConvertRoute(wire2));
+
+            var ints = w1.GetIntersectionsWith(w2);
+            int sp = Program.FindShortestPathTo(ints, w1, w2);
+
+            Assert.AreEqual(30, sp, "shortest path documented");
         }
     }
 }

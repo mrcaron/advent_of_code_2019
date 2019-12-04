@@ -89,13 +89,13 @@ namespace puzzle_3 {
             var nextPt = _points[idx];
 
             if (_currentSegment!.isVertical) {
-                if (nextPt.Y > 0)
+                if (nextPt.Y > _currentP!.Y)
                     _currentP!.Y++;
                 else
                      _currentP!.Y--;
             }
             else {
-                if (nextPt.X > 0)
+                if (nextPt.X > _currentP!.X)
                     _currentP!.X++;
                 else
                     _currentP!.X--;
