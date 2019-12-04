@@ -60,8 +60,14 @@ namespace WireIntercept.Tests
             var wire2 = new List<string> {
                 "U7","R6","D4","L4"
             };
+            
+            var wire1Points = new Path(Program.ConvertRoute(wire1));
+            var wire2Points = new Path(Program.ConvertRoute(wire2));
 
-            List<Point> intsec = Program.FindIntersections(wire1, wire2);
+            var segments_w1 = wire1Points.Segments;
+            var segments_w2 = wire2Points.Segments;
+
+            List<Point> intsec = wire1Points.GetIntersectionsWith(wire2Points);
 
             CollectionAssert.AreEquivalent(
                 new List<Point> {

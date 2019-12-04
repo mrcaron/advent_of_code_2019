@@ -32,5 +32,12 @@ namespace puzzle_3
         public override int GetHashCode() {
             return X ^ Y;
         }
+
+        public int DistanceTo(Point point) {
+            // delta x + delta y
+            return 
+                (Math.Abs(this.X) - Math.Abs(point.X)) +
+                (Math.Abs(this.Y) - Math.Abs(point.Y));
+        }
     }
 }

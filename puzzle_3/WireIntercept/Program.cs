@@ -21,49 +21,29 @@ namespace puzzle_3
                 wire1 = reader.ReadLine().Split(',').ToList();
                 wire2 = reader.ReadLine().Split(',').ToList();
             }
-
-            var intersections = FindIntersections(wire1, wire2);
             
-            var top = intersections.ConvertAll( p => Math.Abs(p.X) + Math.Abs(p.Y) );
-            top.Sort();
-            Console.Out.WriteLine(top.First());
-        }
-
-        #nullable enable
-        public static List<Point> FindIntersections(
-            List<string> wire1, List<string> wire2) {
+            var wire1path = new Path(ConvertRoute(wire1));
+            var wire2path = new Path(ConvertRoute(wire2));
             
-            var wire1Points = ConvertRoute(wire1);
-            var wire2Points = ConvertRoute(wire2);
-
-            var segments_w1 = ConvertToSegments(wire1Points);
-            var segments_w2 = ConvertToSegments(wire2Points);
-
-            var intersects = new List<Point>();
-            foreach (var s1 in segments_w1) {
-                foreach (var s2 in segments_w2) {
-                    Point? i = s1.GetInsersect(s2);
-                    if (i != null) {
-                        intersects.Add(i);
-                    }
-                }
+            var intersections = wire1path.GetIntersectionsWith(wire2path);
+            
+            if (args.Length > 1 && args[1] == "closest") {
+                var top = intersections.ConvertAll( p => Math.Abs(p.X) + Math.Abs(p.Y) );
+                top.Sort();
+                Console.Out.WriteLine(top.First());
+            } else {
+                // find shortest path to points
+                var steps = FindShortestPathTo(intersections, wire1path, wire2path);
             }
-
-            return intersects;
         }
 
-        private static List<Segment> ConvertToSegments(List<Point> points)
+        public static int FindShortestPathTo(List<Point> intersections, Path path1, Path path2)
         {
-            List<Segment> segments = new List<Segment>();
-            Point pLast = new Point();
-
-            foreach(var p in points)
+            foreach (var p in intersections) 
             {
-                segments.Add( new Segment(pLast, p));
-                pLast = p;
+                // p is an intersection
             }
-
-            return segments;
+            throw new NotImplementedException();
         }
 
         private static Dictionary<char,Func<Point,int,Point>> PlotNext = 
