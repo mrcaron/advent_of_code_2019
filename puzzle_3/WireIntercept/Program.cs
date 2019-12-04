@@ -24,6 +24,9 @@ namespace puzzle_3
 
             var intersections = FindIntersections(wire1, wire2);
             
+            var top = intersections.ConvertAll( p => Math.Abs(p.X) + Math.Abs(p.Y) );
+            top.Sort();
+            Console.Out.WriteLine(top.First());
         }
 
         #nullable enable
