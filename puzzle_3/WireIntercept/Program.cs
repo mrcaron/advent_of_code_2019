@@ -34,7 +34,7 @@ namespace puzzle_3
             var wire2Points = ConvertRoute(wire2);
 
             var segments_w1 = ConvertToSegments(wire1Points);
-            var segments_w2 = ConvertToSegments(wire1Points);
+            var segments_w2 = ConvertToSegments(wire2Points);
 
             var intersects = new List<Point>();
             foreach (var s1 in segments_w1) {

@@ -37,13 +37,15 @@ public class Segment {
 
             // Case where s is horizontal
             else if (!s.isVertical && 
-                s.X_MAX > this.P1.X && this.P1.X > s.X_MIN )
+                s.X_MAX > this.P1.X && this.P1.X > s.X_MIN &&
+                s.P1.Y > this.Y_MIN && s.P1.Y < this.Y_MAX )
             {
                 return new Point(this.P1.X, s.P1.Y);
             }
             // Case where s is vertical
             else if (s.isVertical && 
-                s.Y_MAX > this.P1.Y && this.P1.Y > s.Y_MIN)
+                s.Y_MAX > this.P1.Y && this.P1.Y > s.Y_MIN &&
+                s.P1.X > this.X_MIN && s.P1.X < this.X_MAX)
             {
                 return new Point(s.P1.X, this.P1.Y);
             }

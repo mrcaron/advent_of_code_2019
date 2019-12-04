@@ -63,7 +63,7 @@ namespace WireIntercept.Tests
 
             List<Point> intsec = Program.FindIntersections(wire1, wire2);
 
-            CollectionAssert.AreEqual(
+            CollectionAssert.AreEquivalent(
                 new List<Point> {
                     new Point(3,3),
                     new Point(6,5)
