@@ -28,5 +28,17 @@ namespace WireIntercept.Tests
             
             CollectionAssert.AreEqual(expected, Program.ConvertRoute(input));
         }
+
+        [TestMethod]
+        public void TestIntersection()
+        {
+            var s1 = new Segment( new Point(0,1), new Point(2,1) );
+            var s2 = new Segment( new Point(1,0), new Point(1,2) );
+            
+            Assert.AreEqual(
+                new Point(1,1),
+                s1.GetInsersect(s2)
+            );
+        }
     }
 }
